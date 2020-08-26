@@ -1,75 +1,48 @@
 {
-  "version": "0.0.2-0",
-  "description": "React native modal for web",
-  "repository": "https://github.com/Dekoruma/react-native-web-modal",
-  "homepage": "https://github.com/Dekoruma/react-native-web-modal#readme",
-  "bugs": "https://github.com/Dekoruma/react-native-web-modal/issues",
+  "name": "modal-react-native-web",
+  "version": "0.2.0",
+  "description": "React native modal implementation for web",
+  "main": "src/index.js",
+  "repository": "https://github.com/Dekoruma/react-native-web-modal/tree/master/packages/modal-react-native-web",
   "author": "Ray Andrew <raydreww@gmail.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
+  "sideEffects": false,
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-web",
+    "modal",
+    "animation",
+    "react-native-animatable"
+  ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "clean:allnode": "yarn clean:all && rimraf node_modules",
-    "clean:all": "yarn clean:build && lerna clean",
-    "clean:build": "concurrently \"yarn clean:modal\" \"yarn clean:modal-enhanced\"",
-    "build:all": "yarn build:modal && yarn build:modal-enhanced",
-    "build:modal": "lerna run --stream --scope=modal-react-native-web build",
-    "clean:modal": "lerna run --stream --scope=modal-react-native-web clean",
-    "build:modal-enhanced": "lerna run --stream --scope=modal-enhanced-react-native-web build",
-    "clean:modal-enhanced": "lerna run --stream --scope=modal-enhanced-react-native-web clean",
-    "lint": "prettier-eslint --write \"packages/**/*.js\"",
-    "precommit": "lint-staged"
-  },
-  "dependencies": {
-    "react": "^16.5.2",
-    "react-art": "^16.5.2",
-    "react-native-web": "^0.9.3"
+    "build": "yarn clean && yarn build:commonjs",
+    "build:es5": "BABEL_ENV=production babel src -d dist --ignore \"**/__tests__\"",
+    "build:commonjs": "BABEL_ENV=commonjs babel src -d dist --ignore \"**/__tests__\"",
+    "clean": "rimraf dist"
   },
   "devDependencies": {
-    "babel-eslint": "^9.0.0",
-    "concurrently": "^4.0.1",
-    "eslint": "^5.6.0",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-config-react-app": "^3.0.4",
-    "eslint-plugin-flowtype": "^3.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^3.0.0",
-    "eslint-plugin-react": "^7.10.0",
-    "husky": "^1.1.2",
-    "jest": "^23.3.0",
-    "lerna": "^3.4.3",
-    "lint-staged": "^7.2.0",
-    "onchange": "^5.0.2",
-    "prettier": "^1.13.7",
-    "prettier-eslint": "^8.8.2",
-    "prettier-eslint-cli": "^4.7.1",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "1.0.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-native": "^4.0.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "prop-types": "^15.6.2",
     "rimraf": "^2.6.2"
   },
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "examples/*"
-    ],
-    "nohoist": [
-      "**/react-native-animatable",
-      "**/react-native-animatable/**",
-      "**/react-lifecycles-compat",
-      "**/react-lifecycles-compat/**"
-    ]
+  "peerDependencies": {
+    "react": "16.x.x",
+    "react-art": "16.x.x",
+    "react-dom": "16.x.x",
+    "react-native-web": "0.11.x"
   },
-  "lint-staged": {
-    "linters": {
-      "**/*.js": [
-        "prettier-eslint --write",
-        "git add"
-      ]
-    },
-    "ignore": [
-      "**/dist/*.js",
-      "**/node_modules/**"
-    ]
+  "dependencies": {
+    "warning": "^4.0.1"
   }
 }
